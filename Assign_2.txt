@@ -24,9 +24,9 @@ step 2: Change pick statement with s(squah)
         pick C3 Some commit message for C3
         pick C4 Some commit message for C4 
 Step 3: pick C1 Some commit message for C1
-pick C2 Some commit message for C2
-squash C3 Some commit message for C3
-pick C4 Some commit message for C4
+        pick C2 Some commit message for C2
+        squash C3 Some commit message for C3
+        pick C4 Some commit message for C4
 step 4: Save and exit
 Step 4: git log you will find the results.
  
