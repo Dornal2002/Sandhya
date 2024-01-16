@@ -14,9 +14,9 @@ git commit
 git reset --hard HEAD~
 git reset --soft HEAD~
 git remote add origin "github link/remote link"
-git branch -d branch_name //branch delete
-git push origin -d branch name // delete branch on remote center
+git branch -d branch_name
+git push origin -d branch name 
 git stash
-git stash pop // to retrieve stash data
+git stash pop 
 git stash list
 git commit --ammend
