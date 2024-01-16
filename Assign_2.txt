@@ -1,0 +1,72 @@
+1.What is a git cherry-pick?
+=> Cherry picking is the act of picking a commit from a branch and applying it to another. git cherry-pick can be useful for undoing changes. For example, say a commit is accidentally made to the wrong branch. You can switch to the correct branch and cherry-pick the commit to where it should belong.
+
+2.How to set multiple remote repositories for the same project? Explain the use case. you should have a working demo of it.
+=> Define a git remote which will point to multiple git remotes.
+Say, we call it “all”: git remote add all REMOTE-URL-1.
+Register 1st push URL: git remote set-url --add --push all REMOTE-URL-1.
+Register 2nd push URL: git remote set-url --add --push all REMOTE-URL-2.
+Push a branch to all the remotes with git push all BRANCH – replace BRANCH with a real branch name.
+You cannot pull from multiple remotes, but you can fetch updates from multiple remotes with git fetch --all.
+
+3.How to delete one commit or multiple commits permanently Write command for it. 
+If the commits you want to remove are placed at the top of your commit history, use the git reset --hard command with the HEAD object and the number of commits you want to remove. This command will remove the latest commit.
+Command - git reset --hard head~no ofcommits.
+Example- git reset --hard~3
+
+4. How to combine two commits into one commit? For Example, you have 4 different commits C1, C2, C3, and  C4 and you to combine C2 and C3 into one single commit.
+=>Combinig tow or more commits is called squahing techinque.
+To combine more commands we use command git rebase -i head~no of of commits
+step 1: After typing above command the editor gets opened. git rebase -i <commit_before_C2>
+step 2: Change pick statement with s(squah)
+        pick C1 Some commit message for C1
+        pick C2 Some commit message for C2
+        pick C3 Some commit message for C3
+        pick C4 Some commit message for C4 
+Step 3: pick C1 Some commit message for C1
+pick C2 Some commit message for C2
+squash C3 Some commit message for C3
+pick C4 Some commit message for C4
+step 4: Save and exit
+Step 4: git log you will find the results.
+ 
+5.Difference between --force push and --force-with-lease, You have to show the use of both, also you have to show in what scenario --force-with-lease is used?
+=>
+In Git, both --force and --force-with-lease are options used with the git push command to overwrite remote branches. However, they have different use cases and implications.
+
+1. --force push:
+The --force push option is used to forcefully update the remote branch with your local changes, even if it results in the loss of commits on the remote branch. This can be risky, especially in a collaborative environment, as it can lead to the unintentional removal of others' work.
+
+Example:
+git push origin branch-name --force
+
+2. --force-with-lease:
+The --force-with-lease option is a safer alternative to --force. It is designed to prevent overwriting someone else's work unintentionally. It ensures that you only force push if the remote branch matches your expectations. If the remote branch has been updated by someone else since you last fetched, the force push will be rejected, preventing potential data loss.
+
+Example:
+git push origin branch-name --force-with-lease
+Scenario for --force-with-lease:
+Consider the following scenario:
+
+You clone a repository and create a new branch locally.
+Meanwhile, someone else also clones the repository, makes changes, and pushes them to the remote branch.
+You make some local changes and try to push with --force without knowing about the changes made by the other person.
+If you use --force in this scenario, you might unintentionally overwrite the changes made by the other person, leading to data loss and potential conflicts.
+
+On the other hand, if you use --force-with-lease, Git will check if the remote branch has been updated by others before allowing the force push. If someone else has pushed changes in the meantime, your force push will be rejected, prompting you to fetch and merge their changes before pushing again.
+
+Example:
+# Assuming you've already committed changes to your local branch
+git fetch origin
+git push origin branch-name --force-with-lease
+
+6.How to un stage changes from the staged area. write command for it
+To unstage changes from the staging area in Git, you can use the following command:
+
+git reset HEAD <file(s)>
+Replace <file(s)> with the name(s) of the file(s) you want to unstage. If you want to unstage all changes, you can use:
+
+git reset HEAD .
+This command will unstage the specified file(s) or all changes, but it will keep the modifications in your working directory. If you want to discard the changes entirely, you can use the following command:
+
+git checkout -- <file(s)>
